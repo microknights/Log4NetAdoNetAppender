@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <RootNamespace>MicroKnights.Logging</RootNamespace>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>Frank Løvendahl Nielsen</Authors>
+    <Company>MicroKnight ApS</Company>
+    <Product>Log4NetAdoNetAppender</Product>
+    <Description>AdoNetAppender for .Net Core log4net people</Description>
+    <PackageLicenseUrl>https://logging.apache.org/log4net/license.html</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/microknights/Log4NetAdoNetAppender</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/microknights/Log4NetAdoNetAppender</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>log4net adonetappender</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.2" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.2" />
+  </ItemGroup>
+
+</Project>
