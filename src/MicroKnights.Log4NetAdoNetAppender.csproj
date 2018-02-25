@@ -13,12 +13,14 @@
     <RepositoryUrl>https://github.com/microknights/Log4NetAdoNetAppender</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>log4net adonetappender</PackageTags>
+    <Version>1.0.1</Version>
+    <PackageReleaseNotes>accept future (minor.patch version) nuget package references</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.2" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.4.2" />
+    <PackageReference Include="log4net" Version="2.*.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.*.*" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.*.*" />
   </ItemGroup>
 
 </Project>
