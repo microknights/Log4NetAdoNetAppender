@@ -13,8 +13,8 @@
     <RepositoryUrl>https://github.com/microknights/Log4NetAdoNetAppender</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>log4net adonetappender</PackageTags>
-    <Version>1.0.1</Version>
-    <PackageReleaseNotes>accept future (minor.patch version) nuget package references</PackageReleaseNotes>
+    <Version>1.0.2</Version>
+    <PackageReleaseNotes>ConnectionType property now defaults to provided SqlConnection rather than .net framework OleDbConnection</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
