@@ -74,6 +74,10 @@ to this:
 
 Secondly you must specify the configurationfile where your connectionstrings are defined. A new property in the configuration is added - called `ConnectionStringFile`. It will then locate the connectionstring by using `ConnectionStringName`.
 
+## Set connection at runtime
+Instead of getting the connectionstring through a file, you can set it directly at runtime.
+
+Take a peek at the [Log4NetHelper](https://github.com/microknights/Log4NetHelper) project, from where this is possible.
 # NuGet Package
 ```
 PM> Install-Package MicroKnights.Log4NetAdoNetAppender
