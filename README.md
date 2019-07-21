@@ -82,4 +82,14 @@ Take a peek at the [Log4NetHelper](https://github.com/microknights/Log4NetHelper
 ```
 PM> Install-Package MicroKnights.Log4NetAdoNetAppender
 ```
+## Note for .Net Core 3 (Preview)
+Due to a fix in the Type loader, the configuration has a small change in the `connectionType` property.
 
+Was previously:
+`<connectionType value="System.Data.SqlClient.SqlConnection,System.Data,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089" />`
+
+and is now:
+
+`<connectionType value="System.Data.SqlClient.SqlConnection,System.Data.SqlClient,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089" />`
+
+_this change also work backwards, versions before .Net core 3_
