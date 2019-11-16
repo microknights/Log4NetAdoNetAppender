@@ -11,7 +11,7 @@ You log4net.config AdoNetAppender configuration
 <log4net>
   <appender name="AdoNetAppender" type="MicroKnights.Logging.AdoNetAppender, MicroKnights.Log4NetAdoNetAppender">
     <bufferSize value="1" />
-    <connectionType value="System.Data.SqlClient.SqlConnection,System.Data,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089" />
+    <connectionType value="System.Data.SqlClient.SqlConnection,System.Data.SqlClient,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089" />
     <connectionStringName value="log4net" />
     <connectionStringFile value="connectionstrings.json" />
     <commandText value="INSERT INTO Log ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)" />
@@ -74,8 +74,22 @@ to this:
 
 Secondly you must specify the configurationfile where your connectionstrings are defined. A new property in the configuration is added - called `ConnectionStringFile`. It will then locate the connectionstring by using `ConnectionStringName`.
 
+## Set connection at runtime
+Instead of getting the connectionstring through a file, you can set it directly at runtime.
+
+Take a peek at the [Log4NetHelper](https://github.com/microknights/Log4NetHelper) project, from where this is possible.
 # NuGet Package
 ```
 PM> Install-Package MicroKnights.Log4NetAdoNetAppender
 ```
+## Note for .Net Core 3
+Due to a fix in the Type loader, the configuration has a small change in the `connectionType` property.
 
+Was previously:
+`<connectionType value="System.Data.SqlClient.SqlConnection,System.Data,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089" />`
+
+and is now:
+
+`<connectionType value="System.Data.SqlClient.SqlConnection,System.Data.SqlClient,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089" />`
+
+_this change also works backwards, for versions before .Net core 3_
