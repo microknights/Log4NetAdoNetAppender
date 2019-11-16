@@ -138,15 +138,16 @@ namespace MicroKnights.Logging
 		{
 //			ConnectionType = "System.Data.OleDb.OleDbConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
 		    ConnectionType = typeof(SqlConnection).AssemblyQualifiedName;//"System.Data.SqlClient.SqlConnection, System.Data.SqlClient, Version=4.2.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
-			UseTransactions = true;
+            _lazyConnectionTypeResolve = new Lazy<Type>(LazyResolveConnectionType);
+            UseTransactions = true;
 			CommandType = System.Data.CommandType.Text;
 			m_parameters = new ArrayList();
 			ReconnectOnError = false;
 		}
 
-		#endregion // Public Instance Constructors
+        #endregion // Public Instance Constructors
 
-		#region Public Instance Properties
+        # region Public Instance Properties
 
 		/// <summary>
 		/// Gets or sets the database connection string that is used to connect to 
@@ -722,31 +723,39 @@ namespace MicroKnights.Logging
 			return string.Empty;
 		}
 
-		/// <summary>
-		/// Retrieves the class type of the ADO.NET provider.
-		/// </summary>
-		/// <remarks>
-		/// <para>
-		/// Gets the Type of the ADO.NET provider to use to connect to the
-		/// database. This method resolves the type specified in the 
-		/// <see cref="ConnectionType"/> property.
-		/// </para>
-		/// <para>
-		/// Subclasses can override this method to return a different type
-		/// if necessary.
-		/// </para>
-		/// </remarks>
-		/// <returns>The <see cref="Type"/> of the ADO.NET provider</returns>
-		virtual protected Type ResolveConnectionType()
-		{
-			try
-			{
+        /// <summary>
+        /// Retrieves the class type of the ADO.NET provider.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Gets the Type of the ADO.NET provider to use to connect to the
+        /// database. This method resolves the type specified in the 
+        /// <see cref="ConnectionType"/> property.
+        /// </para>
+        /// <para>
+        /// Subclasses can override this method to return a different type
+        /// if necessary.
+        /// </para>
+        /// </remarks>
+        /// <returns>The <see cref="Type"/> of the ADO.NET provider</returns>
+        private Type LazyResolveConnectionType()
+        {
 #if NETSTANDARD1_3
-                return SystemInfo.GetTypeFromString(GetType().GetTypeInfo().Assembly, ConnectionType, true, false);
+            return SystemInfo.GetTypeFromString(GetType().GetTypeInfo().Assembly, ConnectionType, true, false);
 #else
                 return SystemInfo.GetTypeFromString(GetType().Assembly, ConnectionType, true, false);
+//                return SystemInfo.GetTypeFromString(GetType().Assembly, ConnectionType, true, false);
+//                return SystemInfo.GetTypeFromString(GetType().Assembly, ConnectionType, true, false);
 #endif
-			}
+        }
+
+
+        virtual protected Type ResolveConnectionType()
+		{
+			try
+            {
+                return _lazyConnectionTypeResolve.Value;
+            }
 			catch (Exception ex)
 			{
 				ErrorHandler.Error("Failed to load connection type [" + ConnectionType + "]", ex);
@@ -904,7 +913,9 @@ namespace MicroKnights.Logging
 		/// </remarks>
 		private readonly static Type declaringType = typeof(AdoNetAppender);
 
-#endregion Private Static Fields
+        private readonly Lazy<Type> _lazyConnectionTypeResolve;
+
+        #endregion Private Static Fields
 	}
 
 	/// <summary>
