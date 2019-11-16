@@ -12,9 +12,12 @@
     <PackageProjectUrl>https://github.com/microknights/Log4NetAdoNetAppender</PackageProjectUrl>
     <RepositoryUrl>https://github.com/microknights/Log4NetAdoNetAppender</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <PackageId>MicroKnights.Log4NetAdoNetAppender</PackageId>
+    <PackageId>MicroKnights.Log4NetAdoNetAppender.StrongName</PackageId>
     <PackageTags>log4net adonetappender</PackageTags>
-    <PackageReleaseNotes>Multitarget framework, now with netstandard2.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Multitarget framework, now with netstandard2.0 - with strong named assemblies</PackageReleaseNotes>
+
+    <AssemblyOriginatorKeyFile>Log4NetAdoNetAppender.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <PropertyGroup>
