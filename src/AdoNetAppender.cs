@@ -186,7 +186,7 @@ namespace MicroKnights.Logging
 			set { m_appSettingsKey = value; }
 		}
 
-#if NET_2_0 || NETSTANDARD1_3
+#if NET_2_0 || NETSTANDARD
         /// <summary>
         /// The connectionStrings key from App.Config that contains the connection string.
         /// </summary>
@@ -199,7 +199,7 @@ namespace MicroKnights.Logging
 			set { m_connectionStringName = value; }
 		}
 #endif
-#if NETSTANDARD1_3
+#if NETSTANDARD
 	    /// <summary>
         /// The connectionStrings key from App.Config that contains the connection string.
         /// </summary>
@@ -685,7 +685,7 @@ namespace MicroKnights.Logging
 				}
 			}
 #endif
-#if NETSTANDARD1_3
+#if NETSTANDARD
             if (!string.IsNullOrWhiteSpace(ConnectionStringFile))
 		    {
 		        var configFile = new FileInfo(ConnectionStringFile);
@@ -740,7 +740,7 @@ namespace MicroKnights.Logging
         /// <returns>The <see cref="Type"/> of the ADO.NET provider</returns>
         private Type LazyResolveConnectionType()
         {
-#if NETSTANDARD1_3
+#if NETSTANDARD
             return SystemInfo.GetTypeFromString(GetType().GetTypeInfo().Assembly, ConnectionType, true, false);
 #else
                 return SystemInfo.GetTypeFromString(GetType().Assembly, ConnectionType, true, false);
@@ -859,20 +859,20 @@ namespace MicroKnights.Logging
 		/// The appSettings key from App.Config that contains the connection string.
 		/// </summary>
 		private string m_appSettingsKey;
-    
-#if NET_2_0 || NETSTANDARD1_3
+
+#if NET_2_0 || NETSTANDARD
         /// <summary>
         /// The connectionStrings key from App.Config that contains the connection string.
         /// </summary>
         private string m_connectionStringName;
 #endif
 
-#if NETSTANDARD1_3
-	    /// <summary>
-	    /// Points to configuration file containing connectionstrings
-	    /// </summary>
-	    /// <remarks>Currently only .json files supported</remarks>
-	    private string m_connectionStringFile;
+#if NETSTANDARD
+        /// <summary>
+        /// Points to configuration file containing connectionstrings
+        /// </summary>
+        /// <remarks>Currently only .json files supported</remarks>
+        private string m_connectionStringFile;
 #endif
 
         /// <summary>
