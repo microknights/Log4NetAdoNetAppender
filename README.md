@@ -1,5 +1,5 @@
 # Log4NetAdoNetAppender
-.Net Standard 1.3 AdoNetAppender
+.Net Standard 2.0 AdoNetAppender
 
 A late night fix since it do not exists for .net core for some odd reason. This project will only exists until the official [logging.apache.org](https://logging.apache.org/) project is releasing their own AdoNetAppender within the log4net package.
 
