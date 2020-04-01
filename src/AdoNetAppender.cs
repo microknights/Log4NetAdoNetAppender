@@ -23,7 +23,11 @@
 using System;
 using System.Collections;
 using System.Data;
+#if !NETSTANDARD2_1
 using System.Data.SqlClient;
+#else
+using Microsoft.Data.SqlClient;
+#endif
 using System.IO;
 using System.Reflection;
 using log4net.Appender;
@@ -126,7 +130,7 @@ namespace MicroKnights.Logging
 	/// <author>Lance Nehring</author>
 	public class AdoNetAppender : BufferingAppenderSkeleton
 	{
-		#region Public Instance Constructors
+#region Public Instance Constructors
 
 		/// <summary> 
 		/// Initializes a new instance of the <see cref="AdoNetAppender" /> class.
@@ -145,9 +149,9 @@ namespace MicroKnights.Logging
 			ReconnectOnError = false;
 		}
 
-        #endregion // Public Instance Constructors
+#endregion // Public Instance Constructors
 
-        # region Public Instance Properties
+#region Public Instance Properties
 
 		/// <summary>
 		/// Gets or sets the database connection string that is used to connect to 
@@ -915,7 +919,7 @@ namespace MicroKnights.Logging
 
         private readonly Lazy<Type> _lazyConnectionTypeResolve;
 
-        #endregion Private Static Fields
+#endregion Private Static Fields
 	}
 
 	/// <summary>
