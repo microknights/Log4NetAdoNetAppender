@@ -82,7 +82,7 @@ Take a peek at the [Log4NetHelper](https://github.com/microknights/Log4NetHelper
 ```
 PM> Install-Package MicroKnights.Log4NetAdoNetAppender
 ```
-## Note for .Net Core 3
+## Note for .Net Core 3 (up til .Net standard 2.0)
 Due to a fix in the Type loader, the configuration has a small change in the `connectionType` property.
 
 Was previously:
@@ -92,4 +92,18 @@ and is now:
 
 `<connectionType value="System.Data.SqlClient.SqlConnection,System.Data.SqlClient,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089" />`
 
-_this change also works backwards, for versions before .Net core 3_
+_this change also works backwards, for versions before .Net standard 2.0_
+
+## Note for .Net Core 3.1+ (from .Net standard 2.1)
+Microsoft has changed path for the SqlClient library, and we are following. Previously it was `System.Data.SqlClient` and now it is `Microsoft.Data.SqlClient`.
+
+So we must reflect this change, and this is done on the `connectionType` property.
+
+Was previously:
+`<connectionType value="System.Data.SqlClient.SqlConnection,System.Data.SqlClient,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b77a5c561934e089" />`
+
+and is now:
+
+`<connectionType value="Microsoft.Data.SqlClient.SqlConnection, Microsoft.Data.SqlClient, Version=1.0.0.0,Culture=neutral,PublicKeyToken=23ec7fc2d6eaa4a5"/>`
+
+_this change do not work backwards, only for version .Net Standard 2.1 and forward_
