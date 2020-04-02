@@ -5,7 +5,7 @@ A late night fix since it do not exists for .net core for some odd reason. This 
 
 ## How to setup
 
-You log4net.config AdoNetAppender configuration
+You log4net.config AdoNetAppender configuration (Read about use of Microsoft.Data.SqlClient below!)
 
 ```
 <log4net>
