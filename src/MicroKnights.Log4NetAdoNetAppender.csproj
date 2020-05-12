@@ -14,19 +14,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageId>MicroKnights.Log4NetAdoNetAppender</PackageId>
     <PackageTags>log4net adonetappender</PackageTags>
-    <PackageReleaseNotes>Multitarget framework, now with netstandard2.0</PackageReleaseNotes>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageReleaseNotes>Multitarget framework, netstandard1.3-2.0 using System.Data.SqlClient and netstandard2.1+ using Microsoft.Data.SqlClient</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">
