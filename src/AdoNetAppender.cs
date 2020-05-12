@@ -1161,7 +1161,7 @@ namespace MicroKnights.Logging
 			object formattedValue = Layout.Format(loggingEvent);
 
 			// If the value is null then convert to a DBNull
-			if (formattedValue == null)
+			if (formattedValue == null || formattedValue.ToString() == SystemInfo.NullText)
 			{
 				formattedValue = DBNull.Value;
 			}
