@@ -571,8 +571,6 @@ namespace MicroKnights.Logging
 					{
 						dbCmd.Transaction = dbTran;
 					}
-					// prepare the command, which is significantly faster
-					dbCmd.Prepare();
 					// run for all events
 					foreach (LoggingEvent e in events)
 					{
@@ -589,6 +587,8 @@ namespace MicroKnights.Logging
 						// Execute the query
 						dbCmd.ExecuteNonQuery();
 					}
+					// prepare the command, which is significantly faster
+					dbCmd.Prepare();
 				}
 			}
 			else
