@@ -1,0 +1,8 @@
+{
+  "connectionstrings": {
+    "sqlserver": "Server=log4net.database.test;Database=log4net;User Id=log4net;Password=Abcd!234;",
+    "oracle": "oracle-connectionstring",
+    "postgresql": "postgresql-connectionstring",
+    "mysql": "mysql-connectionstring"
+  } 
+}
