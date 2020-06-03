@@ -571,20 +571,21 @@ namespace MicroKnights.Logging
 					{
 						dbCmd.Transaction = dbTran;
 					}
+                    // clear parameters that have been set
+                    dbCmd.Parameters.Clear();
+
+                    // Set the parameter values
+                    foreach (AdoNetAppenderParameter param in m_parameters)
+                        param.Prepare(dbCmd);
 					// prepare the command, which is significantly faster
 					dbCmd.Prepare();
-					// run for all events
+
+                    // run for all events
 					foreach (LoggingEvent e in events)
 					{
-						// clear parameters that have been set
-						dbCmd.Parameters.Clear();
-
 						// Set the parameter values
 						foreach (AdoNetAppenderParameter param in m_parameters)
-						{
-							param.Prepare(dbCmd);
 							param.FormatValue(dbCmd, e);
-						}
 
 						// Execute the query
 						dbCmd.ExecuteNonQuery();
