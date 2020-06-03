@@ -6,11 +6,15 @@
 
   <ItemGroup>
     <None Remove="connectionstrings.json" />
+    <None Remove="postgresql-log4net.config" />
     <None Remove="sqlserver-log4net.config" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="connectionstrings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="postgresql-log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="sqlserver-log4net.config">
@@ -21,6 +25,7 @@
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0-preview.4.20251.6" />
+    <PackageReference Include="Npgsql" Version="4.1.3.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">

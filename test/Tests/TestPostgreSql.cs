@@ -3,27 +3,29 @@ using System.Linq;
 using log4net;
 using MicroKnights.Log4NetAdoNetAppender.Test.Fixtures;
 using Xunit;
+
 // ReSharper disable PossibleMultipleEnumeration
 
-namespace MicroKnights.Log4NetAdoNetAppender.Test
+namespace MicroKnights.Log4NetAdoNetAppender.Test.Tests
 {
-    public class TestSqlServer : IClassFixture<SqlServerFixture>
+    public class TestPostgreSql : IClassFixture<PostgreSqlFixture>
     {
-        private readonly SqlServerFixture _fixture;
+        private readonly PostgreSqlFixture _fixture;
 
-        public TestSqlServer(SqlServerFixture fixture)
+        public TestPostgreSql(PostgreSqlFixture fixture)
         {
             _fixture = fixture;
         }
 
         [Theory]
-        [InlineData("Log4NetNotNullable")]
+//        [InlineData("Log4NetNotNullable")]
         [InlineData("Log4NetNullable")]
         public void TestNotNullable(string tableName)
         {
             var errors = _fixture.InitializeLog4Net(tableName);
 
-            var log = LogManager.GetLogger(typeof(TestSqlServer));
+            var log = LogManager.GetLogger(typeof(TestPostgreSql));
+            LogicalThreadContext.Properties["Number"] = 42;
             log.Info("bla bla");
             Assert.False(errors.Any(),errors.FirstOrDefault());
 
@@ -33,5 +35,4 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test
             Assert.True(true);
         }
     }
-
 }

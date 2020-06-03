@@ -2,7 +2,7 @@
   "connectionstrings": {
     "sqlserver": "Server=log4net.database.test;Database=log4net;User Id=log4net;Password=Abcd!234;",
     "oracle": "oracle-connectionstring",
-    "postgresql": "postgresql-connectionstring",
+    "postgresql": "Server=log4net.database.test;Port=5432;Database=log4net;User ID=log4net;Pooling=true;Password=Abcd!234;",
     "mysql": "mysql-connectionstring"
   } 
 }
