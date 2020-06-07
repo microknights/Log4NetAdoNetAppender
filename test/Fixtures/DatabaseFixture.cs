@@ -35,7 +35,7 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Fixtures
         }
 
 
-        public IEnumerable<string> InitializeLog4Net( string databaseLogTableName)
+        public IEnumerable<string> InitializeLog4Net( string tableAndConfigurationName)
         {
 //            LogManager.ResetConfiguration(GetType().Assembly);
             var repository = LogManager.GetRepository(GetType().Assembly);
@@ -49,7 +49,7 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Fixtures
             if( string.IsNullOrWhiteSpace(ConnectionString))
                 throw new NullReferenceException($"Did not find the connectionstring for \"{databaseProductName}\"");
 
-            var log4NetConfigFilename = $"{databaseProductName}-log4net.config";
+            var log4NetConfigFilename = $"{databaseProductName}-{tableAndConfigurationName}.config";
             var fileInfo = new FileInfo(log4NetConfigFilename);
             if (fileInfo.Exists == false)
                 throw new FileNotFoundException($"Did not find log4net configuration file \"{log4NetConfigFilename}\"");
@@ -65,7 +65,7 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Fixtures
             {
                 if (appender is AdoNetAppender adoNetAppender)
                 {
-                    adoNetAppender.CommandText = string.Format(adoNetAppender.CommandText, databaseLogTableName);
+                    adoNetAppender.CommandText = string.Format(adoNetAppender.CommandText, tableAndConfigurationName);
                     adoNetAppender.ConnectionString = ConnectionString;
                     adoNetAppender.ErrorHandler = this;
                     adoNetAppender.ActivateOptions();

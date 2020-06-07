@@ -17,12 +17,10 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Tests
             _fixture = fixture;
         }
 
-        [Theory]
-        [InlineData("Log4NetNotNullable")]
-        [InlineData("Log4NetNullable")]
-        public void TestNotNullable(string tableName)
+        [Fact]
+        public void TestNullable()
         {
-            var errors = _fixture.InitializeLog4Net(tableName);
+            var errors = _fixture.InitializeLog4Net("log4netnullable");
 
             var log = LogManager.GetLogger(typeof(TestSqlServer));
             log.Info("bla bla");
@@ -33,6 +31,22 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Tests
 
             Assert.True(true);
         }
+
+        [Fact]
+        public void TestNotNullable()
+        {
+            var errors = _fixture.InitializeLog4Net("log4netnotnullable");
+
+            var log = LogManager.GetLogger(typeof(TestSqlServer));
+            log.Info("bla bla");
+            Assert.False(errors.Any(), errors.FirstOrDefault());
+
+            log.Error("bla bla", new Exception());
+            Assert.False(errors.Any(), errors.FirstOrDefault());
+
+            Assert.True(true);
+        }
+
     }
 
 }

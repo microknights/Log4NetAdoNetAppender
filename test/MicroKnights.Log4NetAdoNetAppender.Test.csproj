@@ -6,18 +6,26 @@
 
   <ItemGroup>
     <None Remove="connectionstrings.json" />
-    <None Remove="postgresql-log4net.config" />
-    <None Remove="sqlserver-log4net.config" />
+    <None Remove="postgresql-log4netnotnullable.config" />
+    <None Remove="postgresql-log4netnullable.config" />
+    <None Remove="sqlserver-log4netnotnullable.config" />
+    <None Remove="sqlserver-log4netnullable.config" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="connectionstrings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="postgresql-log4net.config">
+    <Content Include="postgresql-log4netnullable.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="sqlserver-log4net.config">
+    <Content Include="postgresql-log4netnotnullable.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sqlserver-log4netnotnullable.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sqlserver-log4netnullable.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
