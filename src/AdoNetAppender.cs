@@ -1004,6 +1004,17 @@ namespace MicroKnights.Logging
 			}
 		}
 
+        public string Default
+        {
+            get { return m_Default; }
+            set
+            {
+                m_Default = value;
+                HasDefault = true;
+                IsDefaultNull = m_Default.ToLowerInvariant() == "null";
+            }
+        }
+
 		/// <summary>
 		/// Gets or sets the precision for this parameter.
 		/// </summary>
@@ -1161,11 +1172,14 @@ namespace MicroKnights.Logging
 			// Format the value
 			object formattedValue = Layout.Format(loggingEvent);
 
-			// If the value is null then convert to a DBNull
-			if (formattedValue == null || formattedValue.ToString() == SystemInfo.NullText)
-			{
-				formattedValue = DBNull.Value;
-			}
+			// If the value is null (or "(null)") then convert to a DBNull or Default
+			if (formattedValue == null || (HasDefault && ((formattedValue as string ?? formattedValue.ToString()) == SystemInfo.NullText)) )
+            {
+                if (IsDefaultNull)
+                    formattedValue = DBNull.Value;
+                else
+                    formattedValue = Default;
+            }
 
 			param.Value = formattedValue;
 		}
@@ -1183,6 +1197,13 @@ namespace MicroKnights.Logging
 		/// The database type for this parameter.
 		/// </summary>
 		private DbType m_dbType;
+
+        /// <summary>
+        /// The database type for this parameter.
+        /// </summary>
+        private string m_Default;
+        private bool HasDefault { get; set; } = false;
+        private bool IsDefaultNull { get; set; } = true;
 
 		/// <summary>
 		/// Flag to infer type rather than use the DbType
