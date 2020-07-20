@@ -692,8 +692,9 @@ namespace MicroKnights.Logging
 #endif
 #if NETSTANDARD
             if (!string.IsNullOrWhiteSpace(ConnectionStringFile))
-		    {
-		        var configFile = new FileInfo(ConnectionStringFile);
+            {
+                var connectionStringFile = string.Format(ConnectionStringFile, Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? Environment.GetEnvironmentVariable("ENVIRONMENT") ?? "(unknown)");
+                var configFile = new FileInfo(connectionStringFile);
 		        if (configFile.Exists)
 		        {
 		            var configurationBuilder = new ConfigurationBuilder();
