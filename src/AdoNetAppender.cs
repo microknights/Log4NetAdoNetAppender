@@ -24,9 +24,9 @@ using System;
 using System.Collections;
 using System.Data;
 #if !NETSTANDARD2_1
-using System.Data.SqlClient;
+//using System.Data.SqlClient;
 #else
-using Microsoft.Data.SqlClient;
+//using Microsoft.Data.SqlClient;
 #endif
 using System.IO;
 using System.Reflection;
@@ -141,7 +141,8 @@ namespace MicroKnights.Logging
 		public AdoNetAppender()
 		{
 //			ConnectionType = "System.Data.OleDb.OleDbConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
-		    ConnectionType = typeof(SqlConnection).AssemblyQualifiedName;//"System.Data.SqlClient.SqlConnection, System.Data.SqlClient, Version=4.2.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
+//		    ConnectionType = typeof(SqlConnection).AssemblyQualifiedName;//"System.Data.SqlClient.SqlConnection, System.Data.SqlClient, Version=4.2.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
+		    ConnectionType = "(must be set through configuration)";
             _lazyConnectionTypeResolve = new Lazy<Type>(LazyResolveConnectionType);
             UseTransactions = true;
 			CommandType = System.Data.CommandType.Text;
