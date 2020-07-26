@@ -6,14 +6,23 @@
 
   <ItemGroup>
     <None Remove="connectionstrings.json" />
+    <None Remove="mysql-log4netnotnullable.config" />
+    <None Remove="mysql-log4netnullable.config" />
     <None Remove="postgresql-log4netnotnullable.config" />
     <None Remove="postgresql-log4netnullable.config" />
+    <None Remove="sqlserver-log4netbuffering25.config" />
     <None Remove="sqlserver-log4netnotnullable.config" />
     <None Remove="sqlserver-log4netnullable.config" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="connectionstrings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mysql-log4netnotnullable.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mysql-log4netnullable.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="postgresql-log4netnullable.config">
@@ -25,6 +34,9 @@
     <Content Include="sqlserver-log4netnotnullable.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="sqlserver-log4netbuffering25.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="sqlserver-log4netnullable.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -33,6 +45,7 @@
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0-preview.4.20251.6" />
+    <PackageReference Include="MySql.Data" Version="8.0.21" />
     <PackageReference Include="Npgsql" Version="4.1.3.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
     <PackageReference Include="xunit" Version="2.4.1" />

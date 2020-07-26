@@ -4,15 +4,13 @@ using log4net;
 using MicroKnights.Log4NetAdoNetAppender.Test.Fixtures;
 using Xunit;
 
-// ReSharper disable PossibleMultipleEnumeration
-
 namespace MicroKnights.Log4NetAdoNetAppender.Test.Tests
 {
-    public class TestPostgreSql : IClassFixture<PostgreSqlFixture>
+    public class TestMySql : IClassFixture<MySqlFixture>
     {
-        private readonly PostgreSqlFixture _fixture;
+        private readonly MySqlFixture _fixture;
 
-        public TestPostgreSql(PostgreSqlFixture fixture)
+        public TestMySql(MySqlFixture fixture)
         {
             _fixture = fixture;
         }
@@ -20,10 +18,10 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Tests
         [Fact]
         public void TestNullable()
         {
-            var errors = _fixture.InitializeLog4Net("log4netnullable");
-            Assert.Empty(errors);
+            var errors = _fixture.InitializeLog4Net("Log4NetNullable");
+            Assert.False(errors.Any(), errors.FirstOrDefault());
 
-            var log = LogManager.GetLogger(typeof(TestPostgreSql));
+            var log = LogManager.GetLogger(typeof(TestMySql));
             LogicalThreadContext.Properties["Number"] = 42;
             log.Info("bla bla");
             Assert.False(errors.Any(), errors.FirstOrDefault());
@@ -37,10 +35,10 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Tests
         [Fact]
         public void TestNotNullable()
         {
-            var errors = _fixture.InitializeLog4Net("log4netnotnullable");
+            var errors = _fixture.InitializeLog4Net("Log4NetNotNullable");
             Assert.Empty(errors);
 
-            var log = LogManager.GetLogger(typeof(TestPostgreSql));
+            var log = LogManager.GetLogger(typeof(TestMySql));
             LogicalThreadContext.Properties["Number"] = 42;
             log.Info("bla bla");
             Assert.False(errors.Any(), errors.FirstOrDefault());

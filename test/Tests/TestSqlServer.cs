@@ -21,6 +21,7 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Tests
         public void TestNullable()
         {
             var errors = _fixture.InitializeLog4Net("log4netnullable");
+            Assert.Empty(errors);
 
             var log = LogManager.GetLogger(typeof(TestSqlServer));
             log.Info("bla bla");
@@ -36,6 +37,7 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Tests
         public void TestNotNullable()
         {
             var errors = _fixture.InitializeLog4Net("log4netnotnullable");
+            Assert.Empty(errors);
 
             var log = LogManager.GetLogger(typeof(TestSqlServer));
             log.Info("bla bla");
@@ -45,6 +47,20 @@ namespace MicroKnights.Log4NetAdoNetAppender.Test.Tests
             Assert.False(errors.Any(), errors.FirstOrDefault());
 
             Assert.True(true);
+        }
+
+        [Fact]
+        public void TestBuffering25()
+        {
+            var errors = _fixture.InitializeLog4Net("log4netbuffering25");
+            Assert.Empty(errors);
+
+            var log = LogManager.GetLogger(typeof(TestSqlServer));
+            for (int i = 0; i < 30; i++)
+            {
+                log.Info($"bla bla: {i}");
+            }
+            Assert.False(errors.Any(), errors.FirstOrDefault());
         }
 
     }

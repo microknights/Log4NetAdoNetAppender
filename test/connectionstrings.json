@@ -3,6 +3,7 @@
     "sqlserver": "Server=log4net.database.test;Database=log4net;User Id=log4net;Password=Abcd!234;",
     "oracle": "oracle-connectionstring",
     "postgresql": "Server=log4net.database.test;Port=5432;Database=log4net;User ID=log4net;Pooling=true;Password=Abcd!234;",
-    "mysql": "mysql-connectionstring"
+    "mysql": "Server=log4net.database.test;Port=3306;Database=log4net;Uid=sa;Pwd=Abcd!234",
+    "mysqlOLD": "Server=log4net.database.test;Port=3306;Database=log4net;Uid=sa;Pwd=Abcd!234;allow user variables=true;SslMode=Required;maxpoolsize=100;Convert Zero Datetime=true;CharSet=utf8;CheckParameters=false;"
   } 
 }
