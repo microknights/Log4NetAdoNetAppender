@@ -748,7 +748,10 @@ namespace MicroKnights.Logging
         private Type LazyResolveConnectionType()
         {
 #if NETSTANDARD
-            return SystemInfo.GetTypeFromString(GetType().GetTypeInfo().Assembly, ConnectionType, true, false);
+            var type = SystemInfo.GetTypeFromString(GetType().GetTypeInfo().Assembly, ConnectionType, true, false);
+            if( LogLog.IsDebugEnabled )
+    			LogLog.Debug(GetType(),$"ConnectionType loaded: {type.AssemblyQualifiedName}");
+            return type;
 #else
                 return SystemInfo.GetTypeFromString(GetType().Assembly, ConnectionType, true, false);
 //                return SystemInfo.GetTypeFromString(GetType().Assembly, ConnectionType, true, false);
