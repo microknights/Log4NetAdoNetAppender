@@ -713,6 +713,21 @@ namespace MicroKnights.Logging
 		        }
 		        throw new LogException($"Unable to find [{ConnectionStringFile}] at \"{configFile.FullName}\"");
             }
+			else
+            {
+				var configurationBuilder = new ConfigurationBuilder();
+                configurationBuilder.AddEnvironmentVariables();
+				var configuration = configurationBuilder.Build();
+				var connString = configuration.GetConnectionString(ConnectionStringName);
+				if (string.IsNullOrEmpty(connString))
+					connString = configuration.GetConnectionString($"SQLCONNSTR_{ConnectionStringName}"); //Load Azure env Variable
+
+				connectionStringContext = $"EnvironmentVariables: {ConnectionStringName}";
+
+				return connString;
+
+			}
+
 #endif
 
             if (AppSettingsKey != null && AppSettingsKey.Length > 0)
