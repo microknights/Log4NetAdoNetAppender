@@ -15,7 +15,6 @@
     <PackageId>MicroKnights.Log4NetAdoNetAppender</PackageId>
     <PackageTags>log4net adonetappender</PackageTags>
     <PackageReleaseNotes>Multitarget framework, netstandard1.3-2.0 using System.Data.SqlClient and netstandard2.1+ using Microsoft.Data.SqlClient</PackageReleaseNotes>
-    <Version>2.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.3'">

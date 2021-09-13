@@ -216,42 +216,54 @@ namespace MicroKnights.Logging
 			get { return m_connectionStringFile; }
 			set { m_connectionStringFile = value; }
 		}
+        /// <summary>
+        /// The connectionStrings key from App.Config that contains the connection string.
+        /// </summary>
+        /// <remarks>
+        /// This property requires at least .NET 2.0.
+        /// </remarks>
+        public string ConnectionStringEnvironmentName
+        {
+            get { return m_connectionStringEnvironmentName; }
+            set { m_connectionStringEnvironmentName = value; }
+        }
+
 #endif
 
-        /// <summary>
-        /// Gets or sets the type name of the <see cref="IDbConnection"/> connection
-        /// that should be created.
-        /// </summary>
-        /// <value>
-        /// The type name of the <see cref="IDbConnection"/> connection.
-        /// </value>
-        /// <remarks>
-        /// <para>
-        /// The type name of the ADO.NET provider to use.
-        /// </para>
-        /// <para>
-        /// The default is to use the OLE DB provider.
-        /// </para>
-        /// </remarks>
-        /// <example>Use the OLE DB Provider. This is the default value.
-        /// <code>System.Data.OleDb.OleDbConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</code>
-        /// </example>
-        /// <example>Use the MS SQL Server Provider. 
-        /// <code>System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</code>
-        /// </example>
-        /// <example>Use the ODBC Provider. 
-        /// <code>Microsoft.Data.Odbc.OdbcConnection,Microsoft.Data.Odbc,version=1.0.3300.0,publicKeyToken=b77a5c561934e089,culture=neutral</code>
-        /// This is an optional package that you can download from 
-        /// <a href="http://msdn.microsoft.com/downloads">http://msdn.microsoft.com/downloads</a> 
-        /// search for <b>ODBC .NET Data Provider</b>.
-        /// </example>
-        /// <example>Use the Oracle Provider. 
-        /// <code>System.Data.OracleClient.OracleConnection, System.Data.OracleClient, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</code>
-        /// This is an optional package that you can download from 
-        /// <a href="http://msdn.microsoft.com/downloads">http://msdn.microsoft.com/downloads</a> 
-        /// search for <b>.NET Managed Provider for Oracle</b>.
-        /// </example>
-        public string ConnectionType
+		/// <summary>
+		/// Gets or sets the type name of the <see cref="IDbConnection"/> connection
+		/// that should be created.
+		/// </summary>
+		/// <value>
+		/// The type name of the <see cref="IDbConnection"/> connection.
+		/// </value>
+		/// <remarks>
+		/// <para>
+		/// The type name of the ADO.NET provider to use.
+		/// </para>
+		/// <para>
+		/// The default is to use the OLE DB provider.
+		/// </para>
+		/// </remarks>
+		/// <example>Use the OLE DB Provider. This is the default value.
+		/// <code>System.Data.OleDb.OleDbConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</code>
+		/// </example>
+		/// <example>Use the MS SQL Server Provider. 
+		/// <code>System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</code>
+		/// </example>
+		/// <example>Use the ODBC Provider. 
+		/// <code>Microsoft.Data.Odbc.OdbcConnection,Microsoft.Data.Odbc,version=1.0.3300.0,publicKeyToken=b77a5c561934e089,culture=neutral</code>
+		/// This is an optional package that you can download from 
+		/// <a href="http://msdn.microsoft.com/downloads">http://msdn.microsoft.com/downloads</a> 
+		/// search for <b>ODBC .NET Data Provider</b>.
+		/// </example>
+		/// <example>Use the Oracle Provider. 
+		/// <code>System.Data.OracleClient.OracleConnection, System.Data.OracleClient, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</code>
+		/// This is an optional package that you can download from 
+		/// <a href="http://msdn.microsoft.com/downloads">http://msdn.microsoft.com/downloads</a> 
+		/// search for <b>.NET Managed Provider for Oracle</b>.
+		/// </example>
+		public string ConnectionType
 		{
 			get { return m_connectionType; }
 			set { m_connectionType = value; }
@@ -704,18 +716,23 @@ namespace MicroKnights.Logging
 		                configurationBuilder.AddJsonFile(configFile.FullName, false);
 		            }
 		            else
-		            {
                         throw new LogException($"Unsupported configuration format \"{configFile.Extension}\"");
-                    }
-                    var configuration = configurationBuilder.Build();
+                    configurationBuilder.AddEnvironmentVariables();
+					var configuration = configurationBuilder.Build();
 		            connectionStringContext = $"ConnectionStringFile: {configFile.FullName}";
 		            return configuration.GetConnectionString(ConnectionStringName);
 		        }
 		        throw new LogException($"Unable to find [{ConnectionStringFile}] at \"{configFile.FullName}\"");
             }
+
+            if (!string.IsNullOrWhiteSpace(ConnectionStringEnvironmentName))
+            {
+                connectionStringContext = $"ConnectionStringEnvironmentName: {ConnectionStringEnvironmentName}";
+                return Environment.GetEnvironmentVariable(ConnectionStringEnvironmentName);
+            }
 #endif
 
-            if (AppSettingsKey != null && AppSettingsKey.Length > 0)
+			if (AppSettingsKey != null && AppSettingsKey.Length > 0)
 			{
 				connectionStringContext = "AppSettingsKey";
 				string appSettingsConnectionString = SystemInfo.GetAppSetting(AppSettingsKey);
@@ -880,12 +897,17 @@ namespace MicroKnights.Logging
         /// </summary>
         /// <remarks>Currently only .json files supported</remarks>
         private string m_connectionStringFile;
+        /// <summary>
+        /// Points to a environment variable that contains the connectionstring
+        /// </summary>
+        /// <remarks>Currently only .json files supported</remarks>
+        private string m_connectionStringEnvironmentName;
 #endif
 
-        /// <summary>
-        /// String type name of the <see cref="IDbConnection"/> type name.
-        /// </summary>
-        private string m_connectionType;
+		/// <summary>
+		/// String type name of the <see cref="IDbConnection"/> type name.
+		/// </summary>
+		private string m_connectionType;
 
 		/// <summary>
 		/// The text of the command.
