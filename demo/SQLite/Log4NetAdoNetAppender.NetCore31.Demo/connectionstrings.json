@@ -1,0 +1,5 @@
+{
+  "connectionstrings": {
+    "sqlite": "Data Source=\"./log4net.db\""
+  }
+}

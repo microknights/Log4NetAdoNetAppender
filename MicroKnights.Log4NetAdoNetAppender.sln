@@ -1,11 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29509.3
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroKnights.Log4NetAdoNetAppender", "src\MicroKnights.Log4NetAdoNetAppender.csproj", "{CD00FEEF-8E51-4A13-8D1D-4A2712AFA643}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroKnights.Log4NetAdoNetAppender.Test", "test\MicroKnights.Log4NetAdoNetAppender.Test.csproj", "{76EE2EB0-B554-467F-8A11-C1BCC6ECE270}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicroKnights.Log4NetAdoNetAppender.Demo", "MicroKnights.Log4NetAdoNetAppender.Demo", "{BFFAEA7E-2735-439D-80AB-642D1EF14B67}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLite", "SQLite", "{A63C35F8-DC2C-474F-8CD1-7D5E3B7985AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Log4NetAdoNetAppender.NetCore31.Demo", "demo\SQLite\Log4NetAdoNetAppender.NetCore31.Demo\Log4NetAdoNetAppender.NetCore31.Demo.csproj", "{E15D54DE-269A-49D7-8628-3526832745E9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Log4NetAdoNetAppender.NetCore50.Demo", "demo\SQLite\Log4NetAdoNetAppender.NetCore50.Demo\Log4NetAdoNetAppender.NetCore50.Demo.csproj", "{CD4C87B9-B77D-474A-A97A-7A466416EEA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Log4NetAdoNetAppender.NetCore60.Demo", "demo\SQLite\Log4NetAdoNetAppender.NetCore60.Demo\Log4NetAdoNetAppender.NetCore60.Demo.csproj", "{BEE3E4D9-2704-4D63-8E2B-57DAAE816E6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlServer", "SqlServer", "{C5B26F8C-38DE-41DE-A6B6-1EAC9343C3D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MySql", "MySql", "{9F6F7EFE-A9F2-476E-978C-8EED85EEE89D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log4NetAdoNetAppender.Net46.Demo", "demo\SQLite\Log4NetAdoNetAppender.Net46.Demo\Log4NetAdoNetAppender.Net46.Demo.csproj", "{204332A9-D680-40BD-ACED-91A5A223E49E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log4NetAdoNetAppender.Net48.Demo", "demo\SQLite\Log4NetAdoNetAppender.Net48.Demo\Log4NetAdoNetAppender.Net48.Demo.csproj", "{49E25F54-A9EB-4821-A60E-D9AF3685C8C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +39,39 @@ Global
 		{76EE2EB0-B554-467F-8A11-C1BCC6ECE270}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76EE2EB0-B554-467F-8A11-C1BCC6ECE270}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76EE2EB0-B554-467F-8A11-C1BCC6ECE270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E15D54DE-269A-49D7-8628-3526832745E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E15D54DE-269A-49D7-8628-3526832745E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E15D54DE-269A-49D7-8628-3526832745E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E15D54DE-269A-49D7-8628-3526832745E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD4C87B9-B77D-474A-A97A-7A466416EEA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD4C87B9-B77D-474A-A97A-7A466416EEA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD4C87B9-B77D-474A-A97A-7A466416EEA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD4C87B9-B77D-474A-A97A-7A466416EEA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEE3E4D9-2704-4D63-8E2B-57DAAE816E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE3E4D9-2704-4D63-8E2B-57DAAE816E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE3E4D9-2704-4D63-8E2B-57DAAE816E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE3E4D9-2704-4D63-8E2B-57DAAE816E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{204332A9-D680-40BD-ACED-91A5A223E49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{204332A9-D680-40BD-ACED-91A5A223E49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{204332A9-D680-40BD-ACED-91A5A223E49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{204332A9-D680-40BD-ACED-91A5A223E49E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E25F54-A9EB-4821-A60E-D9AF3685C8C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E25F54-A9EB-4821-A60E-D9AF3685C8C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E25F54-A9EB-4821-A60E-D9AF3685C8C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E25F54-A9EB-4821-A60E-D9AF3685C8C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A63C35F8-DC2C-474F-8CD1-7D5E3B7985AD} = {BFFAEA7E-2735-439D-80AB-642D1EF14B67}
+		{E15D54DE-269A-49D7-8628-3526832745E9} = {A63C35F8-DC2C-474F-8CD1-7D5E3B7985AD}
+		{CD4C87B9-B77D-474A-A97A-7A466416EEA9} = {A63C35F8-DC2C-474F-8CD1-7D5E3B7985AD}
+		{BEE3E4D9-2704-4D63-8E2B-57DAAE816E6F} = {A63C35F8-DC2C-474F-8CD1-7D5E3B7985AD}
+		{C5B26F8C-38DE-41DE-A6B6-1EAC9343C3D2} = {BFFAEA7E-2735-439D-80AB-642D1EF14B67}
+		{9F6F7EFE-A9F2-476E-978C-8EED85EEE89D} = {BFFAEA7E-2735-439D-80AB-642D1EF14B67}
+		{204332A9-D680-40BD-ACED-91A5A223E49E} = {A63C35F8-DC2C-474F-8CD1-7D5E3B7985AD}
+		{49E25F54-A9EB-4821-A60E-D9AF3685C8C1} = {A63C35F8-DC2C-474F-8CD1-7D5E3B7985AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {526609E5-2C9C-4391-B782-007E35268534}
