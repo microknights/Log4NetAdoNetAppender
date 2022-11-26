@@ -27,13 +27,19 @@ namespace Log4NetAdoNetAppender.Net46.Demo
                 //创建一个表（如果已经存在，则先删除）
                 Console.WriteLine("Delete Table Log ......");
                 Console.WriteLine("删除日志表 ......");
-                SqliteCommand delTableCmd = connection.CreateCommand();
-                delTableCmd.CommandText = "DROP TABLE IF EXISTS Log";
-                delTableCmd.ExecuteNonQuery();
+
+                using (var delTableCmd = connection.CreateCommand())
+                {
+                    delTableCmd.CommandText = "DROP TABLE IF EXISTS Log";
+                    delTableCmd.ExecuteNonQuery();
+                }
+
                 Console.WriteLine("Create Table Log ......");
                 Console.WriteLine("创建日志表 ......");
-                SqliteCommand createTableCmd = connection.CreateCommand();
-                createTableCmd.CommandText = "CREATE TABLE Log (" +
+
+                using (var createTableCmd = connection.CreateCommand())
+                {
+                    createTableCmd.CommandText = "CREATE TABLE Log (" +
                                              "Id INTEGER PRIMARY KEY," +
                                              "Date DATETIME NOT NULL," +
                                              "Thread VARCHAR(255) NOT NULL," +
@@ -42,7 +48,8 @@ namespace Log4NetAdoNetAppender.Net46.Demo
                                              "Message TEXT DEFAULT NULL," +
                                              "Exception TEXT DEFAULT NULL" +
                                              "); ";
-                createTableCmd.ExecuteNonQuery();
+                    createTableCmd.ExecuteNonQuery();
+                }
             }
             Console.WriteLine("Create Table Log Success ......");
             // Load configuration
@@ -90,23 +97,20 @@ namespace Log4NetAdoNetAppender.Net46.Demo
 
         private static async Task ShowLogDataFromDatabaseWith(string connectionString)
         {
-            var connection = new SqliteConnection(connectionString);
-
-            connection.Open();
-
-            var selectCmd = connection.CreateCommand();
-
-            selectCmd.CommandText = "select * from Log";
-
-            var reader = await selectCmd.ExecuteReaderAsync();
-
-            Console.WriteLine(string.Join("\t", Enumerable.Range(0, reader.FieldCount)
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var selectCmd = connection.CreateCommand();
+                selectCmd.CommandText = "select * from Log";
+                var reader = await selectCmd.ExecuteReaderAsync();
+                Console.WriteLine(string.Join("\t", Enumerable.Range(0, reader.FieldCount)
                                                           .Select(i => reader.GetName(i))));
 
-            while (await reader.ReadAsync())
-            {
-                Console.WriteLine(string.Join("\t", Enumerable.Range(0, reader.FieldCount)
-                                                              .Select(i => reader.GetString(i))));
+                while (await reader.ReadAsync())
+                {
+                    Console.WriteLine(string.Join("\t", Enumerable.Range(0, reader.FieldCount)
+                                                                  .Select(i => reader.GetString(i))));
+                }
             }
         }
     }
