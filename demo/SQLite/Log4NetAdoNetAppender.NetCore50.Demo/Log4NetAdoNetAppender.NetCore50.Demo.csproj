@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="log4net" Version="2.0.15" />
+		<PackageReference Include="MicroKnights.Log4NetAdoNetAppender" Version="2.2.0" />
+		<PackageReference Include="MicroKnights.Log4NetHelper" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Data.Sqlite" Version="3.1.9" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
